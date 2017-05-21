@@ -1,14 +1,7 @@
 package co.joebirch.bastion.domain.interactor
 
-import co.joebirch.bastion.domain.executor.PostExecutionThread
-import co.joebirch.bastion.domain.executor.ThreadExecutor
-import co.joebirch.bastion.domain.interactor.GetTournaments
 import co.joebirch.bastion.domain.model.Tournament
-import co.joebirch.bastion.domain.repository.TournamentsRepository
 import co.joebirch.bastion.domain.util.TestDataFactory
-import com.nhaarman.mockito_kotlin.*
-import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
 import org.junit.Before
 import org.junit.Test
 
@@ -20,13 +13,13 @@ class GetTournamentsTest {
     private var mockPostExecutionThread: co.joebirch.bastion.domain.executor.PostExecutionThread = com.nhaarman.mockito_kotlin.mock()
     private var mockTournamentsRepository: co.joebirch.bastion.domain.repository.TournamentsRepository = com.nhaarman.mockito_kotlin.mock()
 
-    @org.junit.Before
+    @Before
     fun setUp() {
         getTournaments = co.joebirch.bastion.domain.interactor.GetTournaments(mockTournamentsRepository,
                 mockPostExecutionThread, mockThreadExecutor)
     }
 
-    @org.junit.Test
+    @Test
     fun testGetTournamentsUseCaseObservableSucceeds() {
         getTournaments.buildUseCaseObservable(null)
 
@@ -36,7 +29,7 @@ class GetTournamentsTest {
         com.nhaarman.mockito_kotlin.verifyZeroInteractions(mockPostExecutionThread)
     }
 
-    @org.junit.Test
+    @Test
     fun testGetTournamentsUsecaseIsCalledOnce() {
         stubTournamentsRepositoryGetDisciplines()
         stubPostExecutionThreadGetScheduler()

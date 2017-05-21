@@ -8,6 +8,8 @@ import co.joebirch.bastion.domain.util.TestDataFactory
 import com.nhaarman.mockito_kotlin.*
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import org.junit.Before
+import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
 
 class GetStagesTest {
@@ -18,14 +20,14 @@ class GetStagesTest {
     private var mockPostExecutionThread: PostExecutionThread = mock()
     private var mockTournamentsRepository: TournamentsRepository = mock()
 
-    @org.junit.Before
+    @Before
     fun setUp() {
         org.mockito.MockitoAnnotations.initMocks(this)
         getStages = GetStages(mockTournamentsRepository, mockPostExecutionThread,
                 mockThreadExecutor)
     }
 
-    @org.junit.Test
+    @Test
     fun testGetTournamentsUseCaseObservableSucceeds() {
         stubTournamentsRepositoryGetGames()
         getStages.buildUseCaseObservable(null)
@@ -36,7 +38,7 @@ class GetStagesTest {
         verifyZeroInteractions(mockPostExecutionThread)
     }
 
-    @org.junit.Test
+    @Test
     @Throws(Exception::class)
     fun testGetTournamentsUsecaseIsCalledOnce() {
         stubTournamentsRepositoryGetGames()

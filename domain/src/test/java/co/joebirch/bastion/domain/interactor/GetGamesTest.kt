@@ -9,6 +9,7 @@ import com.nhaarman.mockito_kotlin.*
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import org.junit.Before
+import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
 
 class GetGamesTest {
@@ -24,7 +25,7 @@ class GetGamesTest {
         getGames = GetGames(mockTournamentsRepository, mockPostExecutionThread, mockThreadExecutor)
     }
 
-    @org.junit.Test
+    @Test
     fun testGetTournamentsUseCaseObservableSucceeds() {
         stubTournamentsRepositoryGetGames()
         val tournamentId = TestDataFactory.randomUuid()
@@ -37,7 +38,7 @@ class GetGamesTest {
         verifyZeroInteractions(mockPostExecutionThread)
     }
 
-    @org.junit.Test
+    @Test
     fun testGetTournamentsUsecaseIsCalledOnce() {
         stubTournamentsRepositoryGetGames()
         stubPostExecutionThreadGetScheduler()

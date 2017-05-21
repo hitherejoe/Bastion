@@ -1,4 +1,4 @@
-apply plugin: 'java'
+apply plugin: 'kotlin'
 
 configurations {
     provided
@@ -10,11 +10,26 @@ dependencies {
 
     provided domainDependencies.javaxAnnotation
 
+    compile domainDependencies.kotlin
     compile domainDependencies.javaxInject
-    compile domainDependencies.rxJava
+    compile domainDependencies.rxKotlin
 
     testCompile domainTestDependencies.junit
     testCompile domainTestDependencies.mockito
     testCompile domainTestDependencies.assertj
+    testCompile domainTestDependencies.mockito
 
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+repositories {
+    mavenCentral()
 }
